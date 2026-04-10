@@ -56,7 +56,7 @@ A mini Pokémon game inside your terminal — browse, battle, collect, and progr
 ## Requirements
 
 ```bash
-python3 -m pip install Pillow        # for 256-colour half-block sprites
+pip install Pillow        # for 256-colour half-block sprites
 
 sudo apt install mpv                 # recommended for audio
 
