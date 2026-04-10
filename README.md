@@ -68,19 +68,16 @@ sudo apt install mpv                 # recommended for audio
 
 ## Quick Start
 
-```bash
-git clone https://github.com/kernelCream/kernelDex-Pok-dex-RPG-Battle-Simulator
 pip install Pillow
 sudo apt install mpv
-cd kernelDex
+
+Once in the directory run the python file:
 python3 kernelDex.py
-```
 
 ---
 
 ## Controls
 
-### Pokédex
 
 | Key | Action |
 |---|---|
@@ -127,13 +124,6 @@ Boosts `Color` ×1.75, `Contrast` ×1.5, `Sharpness` ×1.4, then applies `Unshar
 **`_rgb256(r, g, b)`** — Converts an RGB triple to the nearest xterm-256 colour index.  
 Compares the 6×6×6 colour cube error against the 24-step greyscale ramp and picks whichever matches more closely.
 
-**`render_sprite(img_data, w, h)`** — Renders a PNG as a grid of `(character, colour_pair)` tuples using Unicode half-block characters (`▀` `▄`). Each character encodes two pixel rows — the top pixel in the foreground colour and the bottom in the background — doubling effective vertical resolution. Uses 64-colour quantisation.
-
-**`ascii_sprite(pid)`** — Fallback ASCII art frame when no image is available. Returns a fixed list of Unicode box-drawing strings.
-
-**`_reset_sprite_pairs()`** — Resets the curses colour-pair allocator back to slot 30, preventing exhaustion when navigating between many Pokémon.
-
-**`_alloc_pair(fg, bg)`** — Thread-safe colour pair allocator. Caches pairs by `(fg, bg)` key, falls back gracefully when the 230-pair limit is reached.
 
 ---
 
@@ -145,27 +135,7 @@ Compares the 6×6×6 colour cube error against the 24-step greyscale ramp and pi
 
 **`fetch_sprite(data)`** — Extracts and downloads the sprite PNG. Prefers official artwork; falls back to the default front sprite.
 
-**`parse_species(data)`** — Parses raw species JSON into a clean dict with `genus`, `flavor`, `gen`, `gender_rate`, `capture_rate`, and `happiness`.
-
 **`get_levelup_moves(poke, max_moves)`** — Extracts level-up moves from Pokémon data, preferring GBA-era game versions. Returns `[(name, level), …]` sorted by learn level.
-
----
-
-### UI Primitives
-
-**`_add(win, y, x, text, attr)`** — Safe `addstr` wrapper. Clips to terminal bounds, handles negative x offsets, and silently swallows curses errors.
-
-**`box(win, y, x, h, w, pair, title)`** — Draws a double-line `╔═╗` box with optional bold title in the section colour.
-
-**`thin_box(win, y, x, h, w, pair, title)`** — Draws a single-line `┌─┐` box, used for secondary panels.
-
-**`type_badge(win, y, x, ptype)`** — Draws a coloured `[ FIRE ]` type label using the type's foreground/background pair. Returns label width for chaining.
-
-**`small_badge(win, y, x, text, fg, bg)`** — Generic coloured pill badge (used for generation, capture rate).
-
-**`stat_bar(win, y, x, label, val, bar_w)`** — Renders a labelled stat bar with `█` fill and `░` empty, coloured green/amber/red based on value thresholds.
-
-**`init_colors()`** — Initialises all 29 fixed curses colour pairs (UI palette) in slots 1–29. Slots 30–230 are reserved for sprite colour pairs.
 
 ---
 
@@ -180,8 +150,6 @@ Compares the 6×6×6 colour cube error against the 24-step greyscale ramp and pi
 **`draw_xp_bar(scr, y, W)`** — Trainer XP bar row. When broke, replaces the XP info with a flashing debt warning.
 
 **`draw_trainer_hud(scr, W)`** — Compact HUD drawn in the title bar: trainer name, level, XP bar, win count, money, broke indicator, lure counter, and streak flame.
-
-**Pokédex entry placement (v7):** On wide terminals (≥24 spare columns beside the stats panel) the Pokédex entry is placed in a dedicated second column to the right of stats. On narrow terminals it is placed immediately after the stats block, before abilities and moves, so it is never buried at the bottom.
 
 ---
 
