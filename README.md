@@ -60,6 +60,7 @@ pip install Pillow        # for 256-colour half-block sprites
 
 sudo apt install mpv                 # recommended for audio
 
+*For Windows : pip install windows-curses Pillow
 
 **Python 3.8+** required. Runs on any Linux/macOS terminal with 256-colour support.  
 **Minimum recommended terminal size:** 120 × 36 characters.
